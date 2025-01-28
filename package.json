@@ -1,13 +1,13 @@
 {
-  "name": "nuxt-oidc-auth",
+  "name": "adfs-auth-fork",
   "type": "module",
-  "version": "1.0.0-beta.5",
+  "version": "1.0.0",
   "private": false,
   "packageManager": "pnpm@9.15.4",
   "description": "OIDC authentication module for Nuxt SSR",
   "license": "MIT",
   "homepage": "https://github.com/itpropro/nuxt-oidc-auth#readme",
-  "repository": "itpropro/nuxt-oidc-auth",
+  "repository": "KostinKD/oidc-auth-fork",
   "exports": {
     ".": {
       "types": "./dist/types.d.ts",
@@ -50,12 +50,13 @@
     "defu": "^6.1.4",
     "h3": "^1.13.1",
     "jose": "^5.9.6",
+    "jwt-decode": "^4.0.0",
     "ofetch": "^1.4.1",
     "scule": "^1.3.0",
     "sirv": "^3.0.0",
     "ufo": "^1.5.4",
     "uncrypto": "^0.1.3",
-    "undici": "^7.2.3",
+    "undici": "^7.2.1",
     "undio": "^0.2.0"
   },
   "devDependencies": {

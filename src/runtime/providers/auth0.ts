@@ -41,7 +41,7 @@ export const auth0 = defineOidcProvider<Auth0ProviderConfig, Auth0RequiredFields
   scopeInTokenRequest: false,
   userNameClaim: '',
   authorizationUrl: 'authorize',
-  tokenUrl: 'oauth/token',
+  tokenUrl: 'token',
   logoutUrl: '',
   requiredProperties: [
     'baseUrl',

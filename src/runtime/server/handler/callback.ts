@@ -2,6 +2,7 @@ import type { H3Event } from 'h3'
 import type { OAuthConfig, PersistentSession, ProviderKeys, TokenRequest, TokenRespose, Tokens, UserSession } from '../../types'
 import { useRuntimeConfig, useStorage } from '#imports'
 import { deleteCookie, eventHandler, getQuery, getRequestURL, readBody, sendRedirect } from 'h3'
+import { jwtDecode } from 'jwt-decode'
 import { normalizeURL, parseURL } from 'ufo'
 import { textToBase64 } from 'undio'
 import * as providerPresets from '../../providers'
@@ -166,16 +167,8 @@ function callbackEventHandler({ onSuccess }: OAuthConfig<UserSession>) {
 
     // Request userinfo
     try {
-      if (config.userInfoUrl) {
-        const userInfoResult = await customFetch(config.userInfoUrl, {
-          headers: {
-            Authorization: `${tokenResponse.token_type} ${tokenResponse.access_token}`,
-          },
-        })
-        user.userInfo = config.filterUserInfo
-          ? Object.fromEntries(Object.entries(userInfoResult).filter(([key]) => config.filterUserInfo?.includes(key)))
-          : userInfoResult
-      }
+      const userInfoResult = jwtDecode(tokenResponse.id_token)
+      user.userInfo = userInfoResult ?? {}
     }
     catch (error) {
       logger.warn(`[${provider}] Failed to fetch userinfo`, error)
