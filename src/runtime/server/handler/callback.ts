@@ -174,6 +174,25 @@ function callbackEventHandler({ onSuccess }: OAuthConfig<UserSession>) {
       logger.warn(`[${provider}] Failed to fetch userinfo`, error)
     }
 
+    if(config.needRequestToBackend && config.extraBackendRequestsUrl){
+      try {
+        const request = customFetch({
+          url: config.extraBackendRequestsUrl,
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${tokenResponse.id_token}`,
+            'Content-Type': 'application/json',
+          },
+        })
+        console.log(request)
+      } catch (error) {
+        logger.error(`[${provider}] Failed to fetch extra backend information`, error)
+      }
+    }
+
+    // Request extra backend information
+    if(config)
+
     // Get user name from access token
     if (config.userNameClaim) {
       user.userName = (config.userNameClaim in tokens.accessToken) ? tokens.accessToken[config.userNameClaim] as string : ''
