@@ -18,6 +18,15 @@ interface Auth0ProviderConfig {
    */
   invitation?: string
   /**
+   * Need extra request to backend custom database for catch user profile
+   * @default false
+   */
+  needRequestToBackend?: boolean
+  /**
+   * URL to backend custom database for catch user profile
+   */
+  extraBackendRequestsUrl?: string
+  /**
    * Populates the username/email field for the login or signup page when redirecting to Auth0. Supported by the Universal Login experience.
    * @default undefined
    */
@@ -36,6 +45,8 @@ export const auth0 = defineOidcProvider<Auth0ProviderConfig, Auth0RequiredFields
   authenticationScheme: 'body',
   userInfoUrl: 'userinfo',
   pkce: true,
+  needRequestToBackend: false,
+  extraBackendRequestsUrl: '',
   state: true,
   nonce: false,
   scopeInTokenRequest: false,

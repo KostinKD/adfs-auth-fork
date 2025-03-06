@@ -70,6 +70,15 @@ export interface OidcProviderConfig {
    */
   pkce?: boolean
   /**
+   * Need extra request to backend custom database for catch user profile
+   * @default false
+   */
+  needRequestToBackend?: boolean
+  /**
+   * URL to backend custom database for catch user profile
+   */
+  extraBackendRequestsUrl?: string
+  /**
    * Use state parameter with a random value. If state is not used, the nonce parameter is used to identify the flow.
    * @default true
    */
@@ -235,6 +244,8 @@ export function defineOidcProvider<TConfig, TRequired extends keyof (OidcProvide
     authenticationScheme: 'header',
     grantType: 'authorization_code',
     pkce: false,
+    needRequestToBackend: false,
+    extraBackendRequestsUrl: '',
     state: true,
     nonce: false,
     scope: ['openid'],
