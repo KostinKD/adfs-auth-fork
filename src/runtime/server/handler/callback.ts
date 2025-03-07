@@ -174,28 +174,27 @@ function callbackEventHandler({ onSuccess }: OAuthConfig<UserSession>) {
       logger.warn(`[${provider}] Failed to fetch userinfo`, error)
     }
 
-    if(config.needRequestToBackend && config.extraBackendRequestsUrl){
+    // Request extra backend information
+    if (config.needRequestToBackend && config.extraBackendRequestsUrl) {
       try {
-        const request = customFetch({
-          url: config.extraBackendRequestsUrl,
+        const extraBackendData = await customFetch(config.extraBackendRequestsUrl, {
           method: 'PUT',
           headers: {
-            'Authorization': `Bearer ${tokenResponse.id_token}`,
-            'Content-Type': 'application/json',
+            Authorization: `Bearer ${tokenResponse.access_token}`,
           },
         })
-        console.log(request)
-      } catch (error) {
+        user.userInfo = { ...user.userInfo, ...extraBackendData }
+      }
+      catch (error) {
         logger.error(`[${provider}] Failed to fetch extra backend information`, error)
       }
     }
 
-    // Request extra backend information
-    if(config)
-
+    if (config) {
     // Get user name from access token
-    if (config.userNameClaim) {
-      user.userName = (config.userNameClaim in tokens.accessToken) ? tokens.accessToken[config.userNameClaim] as string : ''
+      if (config.userNameClaim) {
+        user.userName = (config.userNameClaim in tokens.accessToken) ? tokens.accessToken[config.userNameClaim] as string : ''
+      }
     }
 
     // Get optional claims from id token
