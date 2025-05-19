@@ -37,8 +37,5 @@ export default defineNuxtRouteMiddleware(async (to) => {
     return
   }
   
-  if(useRuntimeConfig().oidc.devtools){
-    return
-  }
   await login()
 })
