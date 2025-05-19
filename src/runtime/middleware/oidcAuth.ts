@@ -36,5 +36,9 @@ export default defineNuxtRouteMiddleware(async (to) => {
   if (loggedIn.value === true || to.path.startsWith('/auth/')) {
     return
   }
+
+  if(useRuntimeConfig().oidc.devMode?.enabled){
+    return
+  }
   await login()
 })
