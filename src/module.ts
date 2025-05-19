@@ -207,7 +207,7 @@ export default defineNuxtModule<ModuleOptions>({
       logger.success(`Registered ${providers.length} OIDC providers: ${providers.join(', ')}`)
 
     // Add global auth middleware
-    if (options.middleware.globalMiddlewareEnabled) {
+    if (options.middleware.globalMiddlewareEnabled && !options.devMode?.enabled) {
       addRouteMiddleware({
         name: '00.auth.global',
         path: resolve('runtime/middleware/oidcAuth'),
