@@ -19,7 +19,7 @@ const DEFAULTS: ModuleOptions = {
   session: {
     automaticRefresh: true,
     expirationCheck: true,
-    maxAge: 60 * 60 * 24, // 1 day
+    maxAge: 90 * 60 * 60 * 24, // 90 day
     maxAuthSessionAge: 300, // 5 minutes
     cookie: {
       sameSite: 'lax',
