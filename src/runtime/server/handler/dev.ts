@@ -15,6 +15,7 @@ export function devEventHandler({ onSuccess }: OAuthConfig<UserSession>) {
 
     const session = await useAuthSession(event)
 
+    // test pull request
     // Construct user object
     const timestamp = Math.trunc(Date.now() / 1000) // Use seconds instead of milliseconds to align with JWT
     const user: UserSession = {
