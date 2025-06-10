@@ -1,3 +1,9 @@
+## v1.0.0-beta.6 [*](https://github.com/KostinKD/adfs-auth-fork/pull/4)
+
+### 🚀 Enhancements
+
+- **handler:** ✨   Added test comment in dev handler
+
 # Changelog
 
 
